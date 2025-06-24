@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset et base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+      color: #e0e0e0;
+      scroll-behavior: smooth;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: saturate(180%) blur(10px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: #8a2be2;
+      letter-spacing: 2px;
+      user-select: none;
+    }
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+    nav a {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #c0c0c0;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: #8a2be2;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav a:hover, nav a:focus {
+      color: #8a2be2;
+    }
+    nav a:hover::after, nav a:focus::after {
+      width: 100%;
+    }
+
+    /* Main content wrapper */
+    main {
+      margin-top: 80px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+
+    /* Section titles */
+    section h2 {
+      font-weight: 600;
+      font-size: 2rem;
+      color: #8a2be2;
+      margin-bottom: 1rem;
+      border-left: 6px solid #8a2be2;
+      padding-left: 0.5rem;
+    }
+
+    /* Sections style */
+    section {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+      transition: box-shadow 0.3s ease;
+    }
+    section:hover {
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
+    }
+
+    /* Paragraphs */
+    p {
+      line-height: 1.6;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: #ddd;
+    }
+
+    /* Buttons */
+    .btn {
+      margin-top: 1.5rem;
+      display: inline-block;
+      background: linear-gradient(45deg, #8a2be2, #4b0082);
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      box-shadow: 0 6px 12px rgba(138,43,226,0.5);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .btn:hover, .btn:focus {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(138,43,226,0.8);
+    }
+
+    /* Staff list */
+    ul.staff-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 1rem;
+    }
+    ul.staff-list li {
+      background: rgba(75, 0, 130, 0.3);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      color: #e0d7f5;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(75,0,130,0.5);
+      user-select: none;
+    }
+
+    /* Discord widget */
+    .discord-widget {
+      width: 100%;
+      height: 500px;
+      border-radius: 15px;
+      border: none;
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
+      transition: box-shadow 0.3s ease;
+    }
+    .discord-widget:hover {
+      box-shadow: 0 0 40px rgba(138, 43, 226, 0.9);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      main {
+        padding: 1rem;
+        gap: 3rem;
+      }
+      section h2 {
+        font-size: 1.5rem;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+      }
+      ul.staff-list {
+        grid-template-columns: 1fr;
+      }
+      .discord-widget {
+        height: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Dream Community</h1>
+  <nav>
+    <a href="#about">À propos</a>
+    <a href="#rules">Règlement</a>
+    <a href="#staff">Staff</a>
+    <a href="#recrutement">Recrutement</a>
+    <a href="#discord">Discord</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="about">
+    <h2>🌟 À propos</h2>
+    <p>Bienvenue sur Dream Community, un serveur Discord communautaire dédié à la bonne humeur, au partage et à l’entraide. Rejoignez-nous pour vivre une expérience unique dans une ambiance chaleureuse et dynamique.</p>
+    <a href="https://discord.gg/TONINVITATION" class="btn" target="_blank" rel="noopener noreferrer">🔗 Rejoindre le serveur</a>
+  </section>
+
+  <section id="rules">
+    <h2>📜 Règlement</h2>
+    <p>Respect mutuel, pas de spam, pas de contenus inappropriés. Merci de suivre les règles pour que la communauté reste agréable et conviviale pour tous.</p>
+  </section>
+
+  <section id="staff">
+    <h2>👥 Équipe du serveur</h2>
+    <ul class="staff-list">
+      <li>Gérant : theniryo</li>
+      <li>Gérant modération : Tomigun21/Jade</li>
+      <li>Administrateur : N/A</li>
+      <li>Modérateurs : N/A</li>
+    </ul>
+  </section>
+
+  <section id="recrutement">
+    <h2>📝 Recrutement</h2>
+    <p>Le recrutement s’ouvre uniquement lors d’annonces publiques. Le protocole complet est disponible sur Discord, avec une procédure claire et équitable.</p>
+    <a href="https://discord.gg/TONINVITATION" class="btn" target="_blank" rel="noopener noreferrer">📥 Postuler via Discord</a>
+  </section>
+
+  <section id="discord">
+    <h2>💬 Serveur Discord</h2>
+    <p>Découvrez l’activité en temps réel de notre serveur :</p>
+    <iframe 
+      src="https://discord.com/widget?id=1382354628783378482&theme=dark" 
+      class="discord-widget"
+      allowtransparency="true"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+  </section>
+
+</main>
+
+<footer style="text-align:center; padding:1rem 0; background:#120f23; color:#aaa; user-select:none;">
+  © 2025 Dream Community — Tous droits réservés.
+</footer>
+
+</body>
+</html>
