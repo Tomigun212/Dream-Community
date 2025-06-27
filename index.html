@@ -266,7 +266,9 @@
     <a href="#about" class="nav-link active">À propos</a>
     <a href="#features" class="nav-link">Fonctionnalités</a>
     <a href="#discord" class="nav-link">Discord</a>
+    <a href="#staff" class="nav-link">Staff</a>
     <a href="https://discord.com/invite/2yksSHj4nP" class="join-btn" target="_blank" rel="noopener">Nous rejoindre</a>
+
   </nav>
 </header>
 
@@ -318,6 +320,36 @@
   </div>
 </section>
 
+
+<section id="staff" class="fade-in">
+  <h2>Nos Staff</h2>
+  <p class="lead">Découvrez notre équipe dévouée de staff, toujours prête à vous accompagner, assurer une ambiance conviviale et garantir la sécurité de notre serveur.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>Fondateur</h3>
+      <br>
+      <p><center>TheNiryo</center></p>
+      </div>
+
+    <div class="card">
+      <h3>Gerant Staff</h3>
+      <p><center>Jade</center></p>
+      <br>
+      <p><center>Tomigun</center></p>
+      </div>
+
+        <div class="card">
+      <h3>Administrateur</h3>
+      <p><center>Recrutement en cours</center></p>
+        </div>
+        <div class="card">
+      <h3>Moderateur</h3>
+      <p><center>Sylvdreigon</center></p>
+      <br>
+      <p><center>ヤXford67 ☘</center></p>
+  </div>
+</section>
+
 <!-- Discord -->
 <section id="discord" class="fade-in">
   <h2>Rejoins-nous sur Discord</h2>
@@ -332,6 +364,8 @@
     </iframe>
   </div>
 </section>
+
+
 
 <footer>
   &copy; 2025 Dream Community — Tous droits réservés
@@ -364,6 +398,11 @@ faders.forEach(fader => {
   appearOnScroll.observe(fader);
 });
 
+  // Incrémentation du compteur de vues
+    let count = localStorage.getItem("viewCount") || 0;
+    count = parseInt(count) + 1;
+    localStorage.setItem("viewCount", count);
+
 
   // Nav link active update on scroll
   const sections = document.querySelectorAll('section');
@@ -388,4 +427,3 @@ faders.forEach(fader => {
 
 </body>
 </html>
-
