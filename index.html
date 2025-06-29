@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" type="image/png" href="Logo.png" />
   <title>Dream Community</title>
+  <!-- AOS Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -80,6 +83,54 @@ body::before {
       transition: color 0.3s ease;
       position: relative;
     }
+
+    .sondage-form input,
+.sondage-form select {
+  padding: 0.9rem 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background-color: #26264c;
+  color: #f0eaff;
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.sondage-form input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.sondage-form input:focus,
+.sondage-form select:focus {
+  border-color: #b388ff;
+  outline: none;
+  box-shadow: 0 0 12px #b388ff88, inset 0 0 8px #b388ff33;
+  background-color: #2f2f5a;
+}
+
+.sondage-form button {
+  background: linear-gradient(135deg, #b388ff, #845ec2);
+  color: white;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(179, 136, 255, 0.3);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.sondage-form button:hover {
+  background: linear-gradient(135deg, #c8a2ff, #a076e8);
+  box-shadow: 0 8px 20px rgba(200, 162, 255, 0.4);
+  transform: scale(1.05);
+}
+
+
 
     nav a::after {
       content: '';
@@ -206,16 +257,17 @@ body::before {
     <a href="#presentation">Présentation</a>
     <a href="#fonctionnalites">Fonctionnalités</a>
     <a href="#staff">Staff</a>
+    <a href="#sondage">Sondage</a>
     <a href="#discord">Discord</a>
   </nav>
 </header>
 
-<section id="presentation">
+<section id="presentation" data-aos="fade-up">
   <h1>Bienvenue sur Dream Community</h1>
   <p>Rejoins une communauté passionnée où l'on joue, partage et rigole ensemble dans un univers bienveillant. Une atmosphère chill avec des events, du gaming et des rencontres amicales !</p>
 </section>
 
-<section id="fonctionnalites">
+<section id="fonctionnalites" data-aos="fade-right">
   <h2>Nos Fonctionnalités</h2>
   <div class="grid">
     <div class="card">
@@ -233,7 +285,7 @@ body::before {
   </div>
 </section>
 
-<section id="staff">
+<section id="staff" data-aos="fade-left">
   <h2>Notre Staff</h2>
   <div class="grid">
     <div class="card">
@@ -255,10 +307,35 @@ body::before {
   </div>
 </section>
 
-<section id="discord">
+<section id="sondage" data-aos="fade-up" style="padding: 4rem 2rem; text-align: center;">
+  <h2 style="color: #f5cbff; font-size: 2.5rem; margin-bottom: 2rem;">🎯 Donne ton avis !</h2>
+
+  <form id="surveyForm" class="sondage-form">
+    <label for="pseudo">Ton pseudo Discord :</label>
+    <input type="text" id="pseudo" name="pseudo" required placeholder="Ex: TheNiryo#0001">
+
+    <label for="jeu">Quel jeu préfères-tu ?</label>
+    <select id="jeu" name="jeu" required>
+      <option value="">-- Choisis un jeu --</option>
+      <option value="Minecraft">Minecraft</option>
+      <option value="Valorant">Valorant</option>
+      <option value="League of Legends">League of Legends</option>
+      <option value="Autre">Autre</option>
+    </select>
+<br>
+<br>
+<br>
+
+    <button type="submit">🚀 Envoyer</button>
+  </form>
+</section>
+
+
+
+<section id="discord" data-aos="zoom-in">
   <h2>Rejoins-nous sur Discord</h2>
   <p>Une seule étape te sépare de ta future communauté préférée !</p>
-  <a class="cta" href="https://discord.gg/TON_INVITE" target="_blank">Rejoindre Dream Community</a>
+  <a class="cta" href="https://discord.gg/2yksSHj4nP" target="_blank">Rejoindre Dream Community</a>
   <br>
   <br>
   <br>
@@ -270,5 +347,42 @@ body::before {
   &copy; 2025 Dream Community. Tous droits réservés.
 </footer>
 
+<!-- AOS Script -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 800,
+    once: true,
+  });
+</script>
+<script>
+  document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const pseudo = document.getElementById('pseudo').value;
+    const jeu = document.getElementById('jeu').value;
+
+    const webhookURL = "https://discord.com/api/webhooks/1389028570483130368/QaIqw1e7RbR8RkNHnesLhZ9FSUR7oaI_AvC4BiU4bpgovqG7QHt_6LU0klyH4PNypfQI"; // Colle ici le lien du webhook
+
+    const payload = {
+      content: `📝 **Nouveau sondage reçu !**
+👤 Pseudo : ${pseudo}
+🎮 Jeu préféré : ${jeu}`
+    };
+
+    await fetch(webhookURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    alert('Merci pour ta réponse !');
+    document.getElementById('surveyForm').reset();
+  });
+</script>
+
+
+
 </body>
 </html>
+
