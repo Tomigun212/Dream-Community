@@ -3,257 +3,197 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="Logo.png" />
   <title>Dream Community</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* Reset & base */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0a0a0a;
-      color: #ddd;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-      cursor: pointer;
+    :root {
+      --primary: #a66bff;
+      --secondary: #3a0ca3;
+      --bg-dark: #0d0c1d;
+      --glass: rgba(255, 255, 255, 0.05);
+      --text: #ffffff;
+      --muted: #bcbcbc;
+      --radius: 20px;
     }
 
-    /* Navbar */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+   body {
+  font-family: 'Quicksand', sans-serif;
+  background: radial-gradient(ellipse at center, #1c123c 0%, #0d0c1d 100%);
+  color: var(--text);
+  scroll-behavior: smooth;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  background: url('Logo.png') no-repeat center;
+  background-size: cover;
+  border-radius: 50%;
+  opacity: 0.04;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  filter: grayscale(100%) blur(2px);
+}
+
+
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 70px;
-      background: transparent;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      padding: 1.5rem 2rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 0 3rem;
-      z-index: 1000;
-      transition: background-color 0.4s ease, box-shadow 0.4s ease;
-      user-select: none;
-    }
-    header.scrolled {
-      background: rgba(40, 0, 0, 0.85);
-      box-shadow: 0 4px 15px #ff4500cc;
-      backdrop-filter: saturate(180%) blur(15px);
-    }
-    header h1 {
-      font-weight: 700;
-      font-size: 1.8rem;
-      color: #ff4500;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      user-select: none;
-      text-shadow: 0 0 8px #ff450099;
-      transition: color 0.3s ease;
-    }
-    nav {
-      display: flex;
-      gap: 2.5rem;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--glass);
     }
+
+    header img {
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--primary);
+      object-fit: cover;
+    }
+
     nav a {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #bbb;
-      position: relative;
-      padding-bottom: 6px;
-      text-transform: uppercase;
+      margin-left: 2rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
       transition: color 0.3s ease;
+      position: relative;
     }
-    nav a:hover,
-    nav a.active {
-      color: #ff4500;
-      text-shadow: 0 0 6px #ff4500cc;
-    }
-    nav a.active::after {
+
+    nav a::after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: -6px;
       left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
       width: 100%;
-      height: 3px;
-      background: #f6f6f6;
-      border-radius: 4px;
-      box-shadow: 0 0 12px #ff4500cc;
     }
 
-    /* Bouton Nous rejoindre */
-    .join-btn {
-      display: inline-block;
-      padding: 0.5rem 1.5rem;
-      border: 2px solid #ff4500;
-      border-radius: 24px;
-      color: #ffffff;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      margin-left: 1rem;
-    }
-    .join-btn:hover {
-      background-color: #ff4500;
-      color: #fefefe;
-      box-shadow: 0 0 15px #ff4500cc;
-    }
-
-    /* Sections */
     section {
-      min-height: 100vh;
-      padding: 7rem 3rem 3rem 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      user-select: none;
-    }
-
-    /* Section Titles */
-    section h2 {
-      font-size: 3rem;
-      color: #f2f0ef;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 8px;
-      text-shadow: 0 0 14px #ff450088;
-    }
-    section p.lead {
-      font-weight: 300;
-      font-size: 1.3rem;
-      max-width: 720px;
-      color: #ccc;
-      margin-bottom: 3rem;
-      line-height: 1.5;
-    }
-
-    /* Cards container */
-    .cards {
-      display: flex;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      padding: 4rem 2rem;
       max-width: 1100px;
-      width: 100%;
+      margin: auto;
+      text-align: center;
     }
 
-    /* Card */
-    .card {
-      background: linear-gradient(145deg, #330000, #550000);
-      border-radius: 20px;
-      box-shadow: 0 0 30px #ff4500aa;
-      padding: 2rem;
-      flex: 1 1 300px;
-      color: #ddd;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      cursor: default;
-      user-select: text;
+    h1, h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
     }
+
+    p {
+      max-width: 700px;
+      margin: 1rem auto;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
     .card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 0 50px #ff4500dd;
+      box-shadow: 0 12px 40px rgba(166, 107, 255, 0.4);
     }
+
     .card h3 {
-      font-size: 1.8rem;
+      color: var(--primary);
       margin-bottom: 1rem;
-      color: #ff7840;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      text-shadow: 0 0 8px #ff4500aa;
-    }
-    .card ul {
-      list-style: none;
-      padding-left: 1rem;
-      text-align: left;
-      font-weight: 500;
-      color: #e3d4ffcc;
-      font-size: 1.05rem;
-      line-height: 1.4;
-    }
-    .card ul li {
-      margin-bottom: 0.8rem;
-      position: relative;
-      padding-left: 1.5rem;
-    }
-    .card ul li::before {
-      content: "✔";
-      position: absolute;
-      left: 0;
-      color: #ff4500;
-      font-weight: 900;
     }
 
-    /* Discord Widget */
-    .discord-widget-wrapper {
-      max-width: 900px;
-      width: 90vw;
-      height: 520px;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 0 40px #ff4500cc;
-      background: #1a0000;
-      margin-top: 2rem;
-      user-select: none;
-    }
-    .discord-widget-wrapper iframe {
+    iframe {
       width: 100%;
-      height: 100%;
+      max-width: 600px;
+      height: 400px;
       border: none;
-      pointer-events: auto;
+      border-radius: var(--radius);
+      margin-top: 2rem;
     }
 
-    /* Footer */
+    .cta {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background: var(--primary);
+      color: var(--bg-dark);
+      border-radius: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .cta:hover {
+      background: #c8a6ff;
+    }
+
     footer {
-      padding: 1.5rem 1rem;
       text-align: center;
-      font-size: 0.9rem;
-      color: #ffb58c;
-      letter-spacing: 2px;
-      user-select: none;
-      background: rgba(40, 0, 0, 0.7);
-      box-shadow: inset 0 1px 5px #ff450022;
+      padding: 2rem;
+      background: #100e24;
+      color: var(--muted);
     }
 
-/* Animate fade-in on scroll */
-.fade-in {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-    /* Responsive */
     @media (max-width: 768px) {
-      nav {
-        gap: 1.3rem;
-      }
-      section h2 {
-        font-size: 2.4rem;
-        letter-spacing: 5px;
-      }
-      section p.lead {
-        font-size: 1.1rem;
-      }
-      .cards {
+      header {
         flex-direction: column;
-        gap: 1.8rem;
+        align-items: flex-start;
       }
-      .card {
-        padding: 1.5rem;
+
+      nav {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
       }
-      .discord-widget-wrapper {
-        height: 400px;
+
+      nav a {
+        margin: 0.5rem 1rem 0.5rem 0;
+      }
+
+      h1, h2 {
+        font-size: 2rem;
       }
     }
   </style>
@@ -261,169 +201,74 @@
 <body>
 
 <header>
-  <h1>Dream Community</h1>
+  <img src="Logo.png" alt="Dream Community Logo rond">
   <nav>
-    <a href="#about" class="nav-link active">À propos</a>
-    <a href="#features" class="nav-link">Fonctionnalités</a>
-    <a href="#discord" class="nav-link">Discord</a>
-    <a href="#staff" class="nav-link">Staff</a>
-    <a href="https://discord.com/invite/2yksSHj4nP" class="join-btn" target="_blank" rel="noopener">Nous rejoindre</a>
-
+    <a href="#presentation">Présentation</a>
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#staff">Staff</a>
+    <a href="#discord">Discord</a>
   </nav>
 </header>
 
-<!-- À propos -->
-<section id="about" class="fade-in">
-  <h2>À propos</h2>
-  <p class="lead">Bienvenue dans Dream Community, un serveur où la créativité, le fun et l’entraide sont au cœur de chaque interaction. Rejoins-nous pour vivre une expérience unique dans une ambiance chaleureuse et respectueuse.</p>
-  <div class="cards">
+<section id="presentation">
+  <h1>Bienvenue sur Dream Community</h1>
+  <p>Rejoins une communauté passionnée où l'on joue, partage et rigole ensemble dans un univers bienveillant. Une atmosphère chill avec des events, du gaming et des rencontres amicales !</p>
+</section>
+
+<section id="fonctionnalites">
+  <h2>Nos Fonctionnalités</h2>
+  <div class="grid">
     <div class="card">
-      <h3>Communauté Active</h3>
-      <ul>
-        <li>Salons variés et thématiques</li>
-        <li>Événements hebdomadaires</li>
-        <li>Une équipe modération dédiée</li>
-      </ul>
+      <h3>🎮 Jeux Multijoueurs</h3>
+      <p>Sessions régulières sur vos jeux préférés avec des joueurs actifs et cool.</p>
     </div>
     <div class="card">
-      <h3>Entraide & Support</h3>
-      <ul>
-        <li>Staff disponible 24/7</li>
-        <li>Aide rapide et efficace</li>
-        <li>Conseils et ressources</li>
-      </ul>
+      <h3>🗨️ Salons Vocaux & Textuels</h3>
+      <p>Des espaces clairs, sans spam, pour discuter en toute tranquillité.</p>
+    </div>
+    <div class="card">
+      <h3>🌠 Événements Communautaires</h3>
+      <p>Blind test, karaoké, tournois et animations régulières à ne pas manquer !</p>
     </div>
   </div>
 </section>
 
-<!-- Fonctionnalités -->
-<section id="features" class="fade-in">
-  <h2>Fonctionnalités</h2>
-  <p class="lead">Dream Community offre des fonctionnalités modernes pour t’aider à profiter pleinement de l’expérience, que tu sois gamer, créateur ou simple curieux.</p>
-  <div class="cards">
+<section id="staff">
+  <h2>Notre Staff</h2>
+  <div class="grid">
     <div class="card">
-      <h3>Activités & Jeux</h3>
-      <ul>
-        <li>Concours créatifs réguliers</li>
-        <li>Challenges communautaires</li>
-        <li>Streams et événements live</li>
-      </ul>
+      <h3>🌟 TheNiryo - Createur</h3>
+      <p>💼 Visionnaire et créateur de Dream Community, il a posé les premières pierres d’un lieu de partage et de fun sans limite.</p>
     </div>
     <div class="card">
-      <h3>Technologie</h3>
-      <ul>
-        <li>Bot de modération puissant</li>
-        <li>Salons vocaux et textuels optimisés</li>
-        <li>Widget Discord intégré</li>
-      </ul>
+      <h3>💡 Jade et Tomigun - Gérant Administration</h3>
+      <p>🛠️ Pilier de l’organisation, il veille au bon fonctionnement du serveur et assure une gestion efficace et humaine.</p>
+    </div>
+    <div class="card">
+      <h3>🤺 En recrutement Ouvert (Ticket) - Administrateur</h3>
+      <p>🧩 Les architectes de la communauté : présents pour encadrer, organiser et innover au quotidien.</p>
+    </div>
+     <div class="card">
+      <h3>💡 ヤXford67 et Sylvdreigon - Moderateur</h3>
+      <p>🛡️ Gardien·nes de la bonne ambiance, ils assurent la sécurité, le respect et la convivialité entre tous les membres.</p>
     </div>
   </div>
 </section>
 
-
-<section id="staff" class="fade-in">
-  <h2>Nos Staff</h2>
-  <p class="lead">Découvrez notre équipe dévouée de staff, toujours prête à vous accompagner, assurer une ambiance conviviale et garantir la sécurité de notre serveur.</p>
-  <div class="cards">
-    <div class="card">
-      <h3>Fondateur</h3>
-      <br>
-      <p><center>TheNiryo</center></p>
-      </div>
-
-    <div class="card">
-      <h3>Gerant Staff</h3>
-      <p><center>Jade</center></p>
-      <br>
-      <p><center>Tomigun</center></p>
-      </div>
-
-        <div class="card">
-      <h3>Administrateur</h3>
-      <p><center>Recrutement en cours</center></p>
-        </div>
-        <div class="card">
-      <h3>Moderateur</h3>
-      <p><center>Sylvdreigon</center></p>
-      <br>
-      <p><center>ヤXford67 ☘</center></p>
-  </div>
-</section>
-
-<!-- Discord -->
-<section id="discord" class="fade-in">
+<section id="discord">
   <h2>Rejoins-nous sur Discord</h2>
-  <p class="lead">Discute en temps réel avec la communauté et découvre tout ce que Dream Community peut t’offrir.</p>
-  <div class="discord-widget-wrapper">
-    <iframe
-      src="https://discord.com/widget?id=1382354628783378482&theme=dark"
-      allowtransparency="true"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-      scrolling="no"
-      >
-    </iframe>
-  </div>
+  <p>Une seule étape te sépare de ta future communauté préférée !</p>
+  <a class="cta" href="https://discord.gg/TON_INVITE" target="_blank">Rejoindre Dream Community</a>
+  <br>
+  <br>
+  <br>
+  <iframe src="https://discord.com/widget?id=1382354628783378482&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+  </iframe>
 </section>
-
-
 
 <footer>
-  &copy; 2025 Dream Community — Tous droits réservés
+  &copy; 2025 Dream Community. Tous droits réservés.
 </footer>
-
-<script>
-  // Navbar background on scroll
-  const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    if(window.scrollY > 50){
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-
- // Smooth fade-in animations on scroll
-const faders = document.querySelectorAll('.fade-in');
-const appearOptions = { threshold: 0.3 };
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, appearOptions);
-
-faders.forEach(fader => {
-  appearOnScroll.observe(fader);
-});
-
-  // Incrémentation du compteur de vues
-    let count = localStorage.getItem("viewCount") || 0;
-    count = parseInt(count) + 1;
-    localStorage.setItem("viewCount", count);
-
-
-  // Nav link active update on scroll
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('nav a');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 100;
-      if(window.scrollY >= sectionTop){
-        current = section.getAttribute('id');
-      }
-    });
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if(link.getAttribute('href').substring(1) === current){
-        link.classList.add('active');
-      }
-    });
-  });
-</script>
 
 </body>
 </html>
