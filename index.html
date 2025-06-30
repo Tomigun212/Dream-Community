@@ -142,6 +142,64 @@ body::before {
   transition: all 0.3s ease;
 }
 
+   .sondage-form input,
+.sondage-form select {
+  padding: 0.9rem 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background-color: #26264c;
+  color: #f0eaff;
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.avis-form input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.avis-form input:focus,
+.avis-form select:focus {
+  border-color: #b388ff;
+  outline: none;
+  box-shadow: 0 0 12px #b388ff88, inset 0 0 8px #b388ff33;
+  background-color: #2f2f5a;
+}
+
+.avis-form button {
+  background: linear-gradient(135deg, #b388ff, #845ec2);
+  color: white;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(179, 136, 255, 0.3);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.avis-form button:hover {
+  background: linear-gradient(135deg, #c8a2ff, #a076e8);
+  box-shadow: 0 8px 20px rgba(200, 162, 255, 0.4);
+  transform: scale(1.05);
+}
+   .avis-form input,
+.avis-form select {
+  padding: 0.9rem 1.2rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background-color: #26264c;
+  color: #f0eaff;
+  font-size: 1rem;
+  font-family: 'Quicksand', sans-serif;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
 body {
   background-color: #111;
   color: #eee;
@@ -390,6 +448,30 @@ body {
     <button type="submit">🚀 Envoyer</button>
   </form>
 </section>
+<section id="sondages" data-aos="fade-up" style="padding: 4rem 2rem; text-align: center;">
+  <h2 style="color: #f5cbff; font-size: 2.5rem; margin-bottom: 2rem;">🎯 Donne ton avis !</h2>
+
+  <form id="surveyForms" class="avis-form">
+    <label for="pseudos">Ton pseudo :</label>
+    <input type="text" id="pseudos" name="pseudos" required placeholder="Ex: TheNiryo">
+    <label for="jeus">Ton Avis ici</label>
+     <input type="text" id="jeus" name="jeus" required placeholder="Ex: Fabuleux !">
+     <br>
+     <br>
+          <label for="note">Donne Ton Avis : </label>
+     <input type="number" id="note" name="note" required placeholder="0/5">
+
+<div style="display: none;">
+  <label for="website">Ton site web :</label>
+  <input type="text" id="website" name="website">
+</div>
+
+<br>
+<br>
+<br>
+    <button type="submit">🚀 Envoyer</button>
+  </form>
+</section>
 
 
 
@@ -447,7 +529,7 @@ body {
     const jeu = document.getElementById('jeu').value;
 
     const payload = {
-      content: `📝 **Nouveau sondage reçu !**
+      content: `❓ **Nouveau sondage reçu !**
 👤 Pseudo : ${pseudo}
 🎮 Jeu préféré : ${jeu}`
     };
@@ -461,6 +543,53 @@ body {
 
       alert('Merci pour ta réponse !');
       form.reset();
+    } catch (error) {
+      console.error("Erreur lors de l'envoi au webhook :", error);
+      alert("Une erreur est survenue. Merci de réessayer.");
+    }
+  });
+</script>
+
+<script>
+  const forms = document.getElementById('surveyForms');
+  const webhookURLs = "https://discord.com/api/webhooks/1389311283722977452/R03dulZ68CYtPt6OwbLpKamKzZMyDVFlhYhgOrTWBPofIxmvHci0HLT4CMbAkfyEE5_0"; // Webhook Discord
+  const formLoadTimes = Date.now();
+
+  forms.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const honeypot = document.getElementById("website").value;
+    if (honeypot) {
+      console.warn("Spam détecté (honeypot).");
+      return;
+    }
+
+    const now = Date.now();
+    if (now - formLoadTimes < 10000) {
+      alert("Merci de prendre quelques secondes avant d'envoyer le formulaire.");
+      return;
+    }
+
+    const pseudos = document.getElementById('pseudos').value;
+    const jeus = document.getElementById('jeus').value;
+    const note = document.getElementById('note').value;
+
+    const payload = {
+      content: `📝 **Nouvelle Avis**
+👤 Pseudo : ${pseudos}
+🎮 Jeu préféré : ${jeus}
+⭐ Note : ${note}`
+    };
+
+    try {
+      await fetch(webhookURLs, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      alert('Merci pour ta réponse !');
+      forms.reset();
     } catch (error) {
       console.error("Erreur lors de l'envoi au webhook :", error);
       alert("Une erreur est survenue. Merci de réessayer.");
