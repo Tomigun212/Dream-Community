@@ -379,7 +379,6 @@ body {
     <label for="jeu">Ton jeu préfere ici</label>
      <input type="text" id="jeu" name="jeu" required placeholder="Ex: Valorant">
 
-     <!-- Champ honeypot anti-bot -->
 <div style="display: none;">
   <label for="website">Ton site web :</label>
   <input type="text" id="website" name="website">
@@ -419,7 +418,6 @@ body {
     once: true,
   });
 </script>
-<!-- Ajoute ce champ dans ton formulaire pour le honeypot -->
 <div style="display: none;">
   <label for="website">Ton site web :</label>
   <input type="text" id="website" name="website">
@@ -428,26 +426,23 @@ body {
 <script>
   const form = document.getElementById('surveyForm');
   const webhookURL = "https://discord.com/api/webhooks/1389028570483130368/QaIqw1e7RbR8RkNHnesLhZ9FSUR7oaI_AvC4BiU4bpgovqG7QHt_6LU0klyH4PNypfQI"; // Webhook Discord
-  const formLoadTime = Date.now(); // Horodatage au chargement
+  const formLoadTime = Date.now();
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    // Anti-bot : champ invisible rempli
     const honeypot = document.getElementById("website").value;
     if (honeypot) {
       console.warn("Spam détecté (honeypot).");
       return;
     }
 
-    // Anti-spam humain : trop rapide
     const now = Date.now();
     if (now - formLoadTime < 10000) {
       alert("Merci de prendre quelques secondes avant d'envoyer le formulaire.");
       return;
     }
 
-    // Récupération des valeurs
     const pseudo = document.getElementById('pseudo').value;
     const jeu = document.getElementById('jeu').value;
 
