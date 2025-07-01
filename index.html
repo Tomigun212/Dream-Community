@@ -365,7 +365,6 @@ body {
     <a href="#presentation">Présentation</a>
     <a href="#fonctionnalites">Fonctionnalités</a>
     <a href="#staff">Staff</a>
-    <a href="#sondage">Sondage</a>
     <a href="#discord">Discord</a>
   </nav>
 </header>
@@ -427,30 +426,6 @@ body {
       <h3>🎥 Mat l'enchanteur - Createur Video</h3>
       <p>🎬 Chaque image est un parfum visuel : laissez les vidéos éveiller vos sens et raconter l’âme de votre histoire.</p>
     </div>
-    
-  </div>
-</section>
-
-<section id="sondage" data-aos="fade-up" style="padding: 4rem 2rem; text-align: center;">
-  <h2 style="color: #f5cbff; font-size: 2.5rem; margin-bottom: 2rem;">🎯 Suggère ton jeu !</h2>
-
-  <form id="surveyForm" class="sondage-form">
-    <label for="pseudo">Ton pseudo Discord :</label>
-    <input type="text" id="pseudo" name="pseudo" required placeholder="Ex: TheNiryo#0001">
-    <label for="jeu">Le jeu que tu suggères ici </label>
-     <input type="text" id="jeu" name="jeu" required placeholder="Ex: Valorant">
-
-<div style="display: none;">
-  <label for="website">Ton site web :</label>
-  <input type="text" id="website" name="website">
-</div>
-
-<br>
-<br>
-<br>
-    <button type="submit">🚀 Envoyer</button>
-  </form>
-
 
 <section id="discord" data-aos="zoom-in">
   <h2>Rejoins-nous sur Discord</h2>
@@ -462,35 +437,6 @@ body {
   <iframe src="https://discord.com/widget?id=1382354628783378482&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
   </iframe>
 </section>
-
-
-</section>
-<section id="sondages" data-aos="fade-up" style="padding: 4rem 2rem; text-align: center;">
-  <h2 style="color: #f5cbff; font-size: 2.5rem; margin-bottom: 2rem;">🎯 Donne ton avis !</h2>
-
-  <form id="surveyForms" class="avis-form">
-    <label for="pseudos">Ton pseudo :</label>
-    <input type="text" id="pseudos" name="pseudos" required placeholder="Ex: TheNiryo">
-    <label for="jeus">Ton Avis ici</label>
-     <input type="text" id="jeus" name="jeus" required placeholder="Ex: Fabuleux !">
-     <br>
-     <br>
-          <label for="note">Donne Ta Note :  </label>
-     <input type="number" id="note" name="note" required placeholder="0/5">
-
-<div style="display: none;">
-  <label for="website">Ton site web :</label>
-  <input type="text" id="website" name="website">
-</div>
-
-<br>
-<br>
-<br>
-    <button type="submit">🚀 Envoyer</button>
-  </form>
-</section>
-
-
 <footer>
   &copy; 2025 Dream Community. Tous droits réservés.
 </footer>
@@ -503,102 +449,6 @@ body {
   AOS.init({
     duration: 800,
     once: true,
-  });
-</script>
-<div style="display: none;">
-  <label for="website">Ton site web :</label>
-  <input type="text" id="website" name="website">
-</div>
-
-<script>
-  const form = document.getElementById('surveyForm');
-  const webhookURL = "https://discord.com/api/webhooks/1389028570483130368/QaIqw1e7RbR8RkNHnesLhZ9FSUR7oaI_AvC4BiU4bpgovqG7QHt_6LU0klyH4PNypfQI"; // Webhook Discord
-  const formLoadTime = Date.now();
-
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const honeypot = document.getElementById("website").value;
-    if (honeypot) {
-      console.warn("Spam détecté (honeypot).");
-      return;
-    }
-
-    const now = Date.now();
-    if (now - formLoadTime < 10000) {
-      alert("Merci de prendre quelques secondes avant d'envoyer le formulaire.");
-      return;
-    }
-
-    const pseudo = document.getElementById('pseudo').value;
-    const jeu = document.getElementById('jeu').value;
-
-    const payload = {
-      content: `❓ **Nouveau sondage reçu !**
-👤 Pseudo : ${pseudo}
-🎮 Jeu préféré : ${jeu}`
-    };
-
-    try {
-      await fetch(webhookURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      alert('Merci pour ta réponse !');
-      form.reset();
-    } catch (error) {
-      console.error("Erreur lors de l'envoi au webhook :", error);
-      alert("Une erreur est survenue. Merci de réessayer.");
-    }
-  });
-</script>
-
-<script>
-  const forms = document.getElementById('surveyForms');
-  const webhookURLs = "https://discord.com/api/webhooks/1389311283722977452/R03dulZ68CYtPt6OwbLpKamKzZMyDVFlhYhgOrTWBPofIxmvHci0HLT4CMbAkfyEE5_0"; // Webhook Discord
-  const formLoadTimes = Date.now();
-
-  forms.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const honeypot = document.getElementById("website").value;
-    if (honeypot) {
-      console.warn("Spam détecté (honeypot).");
-      return;
-    }
-
-    const now = Date.now();
-    if (now - formLoadTimes < 10000) {
-      alert("Merci de prendre quelques secondes avant d'envoyer le formulaire.");
-      return;
-    }
-
-    const pseudos = document.getElementById('pseudos').value;
-    const jeus = document.getElementById('jeus').value;
-    const note = document.getElementById('note').value;
-
-    const payload = {
-      content: `📝 **Nouvelle Avis**
-👤 Pseudo : ${pseudos}
-🎮 Jeu préféré : ${jeus}
-⭐ Note : ${note}`
-    };
-
-    try {
-      await fetch(webhookURLs, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      alert('Merci pour ta réponse !');
-      forms.reset();
-    } catch (error) {
-      console.error("Erreur lors de l'envoi au webhook :", error);
-      alert("Une erreur est survenue. Merci de réessayer.");
-    }
   });
 </script>
 </body>
