@@ -4,6 +4,7 @@
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Rejoins Dream Community, un serveur Discord chill et passionné ! Gaming, événements fun, bonne ambiance et staff actif t’attendent. Clique pour découvrir ta future communauté.">
   <link rel="icon" type="image/png" href="Logo.png" />
   <title>Dream Community</title>
   <!-- AOS Library -->
@@ -53,6 +54,110 @@ body::before {
   filter: grayscale(100%) blur(2px);
 }
 
+.calendar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.event-card {
+  background: var(--glass);
+  border-radius: var(--radius);
+  padding: 2rem;
+  width: 320px;
+  min-height: 220px;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+
+  /* Pour l'animation */
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.event-card.fade-out {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.event-card.fade-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.3s ease;
+  padding: 0.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+
+.nav-btn:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 10px var(--primary);
+}
+
+/* Badge statut */
+.event-status {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: white;
+  user-select: none;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.event-status.upcoming {
+  background-color: #4caf50; /* vert */
+}
+
+.event-status.soon {
+  background-color: #ff9800; /* orange */
+}
+
+.event-status.past {
+  background-color: #f44336; /* rouge */
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.filters button {
+  padding: 0.5rem 1rem;
+  background: var(--glass);
+  border: 1px solid white;
+  color: white;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.filters button:hover {
+  background: var(--primary);
+}
+
+
+
 
     header {
       background: rgba(0, 0, 0, 0.6);
@@ -83,122 +188,6 @@ body::before {
       transition: color 0.3s ease;
       position: relative;
     }
-
-    .sondage-form input,
-.sondage-form select {
-  padding: 0.9rem 1.2rem;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  background-color: #26264c;
-  color: #f0eaff;
-  font-size: 1rem;
-  font-family: 'Quicksand', sans-serif;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-}
-
-.sondage-form input::placeholder {
-  color: #aaa;
-  font-style: italic;
-}
-
-.sondage-form input:focus,
-.sondage-form select:focus {
-  border-color: #b388ff;
-  outline: none;
-  box-shadow: 0 0 12px #b388ff88, inset 0 0 8px #b388ff33;
-  background-color: #2f2f5a;
-}
-
-.sondage-form button {
-  background: linear-gradient(135deg, #b388ff, #845ec2);
-  color: white;
-  padding: 0.9rem 1.5rem;
-  border: none;
-  border-radius: 16px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 6px 15px rgba(179, 136, 255, 0.3);
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-}
-
-.sondage-form button:hover {
-  background: linear-gradient(135deg, #c8a2ff, #a076e8);
-  box-shadow: 0 8px 20px rgba(200, 162, 255, 0.4);
-  transform: scale(1.05);
-}
-   .sondage-form input,
-.sondage-form select {
-  padding: 0.9rem 1.2rem;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  background-color: #26264c;
-  color: #f0eaff;
-  font-size: 1rem;
-  font-family: 'Quicksand', sans-serif;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-}
-
-   .sondage-form input,
-.sondage-form select {
-  padding: 0.9rem 1.2rem;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  background-color: #26264c;
-  color: #f0eaff;
-  font-size: 1rem;
-  font-family: 'Quicksand', sans-serif;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-}
-
-.avis-form input::placeholder {
-  color: #aaa;
-  font-style: italic;
-}
-
-.avis-form input:focus,
-.avis-form select:focus {
-  border-color: #b388ff;
-  outline: none;
-  box-shadow: 0 0 12px #b388ff88, inset 0 0 8px #b388ff33;
-  background-color: #2f2f5a;
-}
-
-.avis-form button {
-  background: linear-gradient(135deg, #b388ff, #845ec2);
-  color: white;
-  padding: 0.9rem 1.5rem;
-  border: none;
-  border-radius: 16px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 6px 15px rgba(179, 136, 255, 0.3);
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-}
-
-.avis-form button:hover {
-  background: linear-gradient(135deg, #c8a2ff, #a076e8);
-  box-shadow: 0 8px 20px rgba(200, 162, 255, 0.4);
-  transform: scale(1.05);
-}
-   .avis-form input,
-.avis-form select {
-  padding: 0.9rem 1.2rem;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  background-color: #26264c;
-  color: #f0eaff;
-  font-size: 1rem;
-  font-family: 'Quicksand', sans-serif;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-}
 
 body {
   background-color: #111;
@@ -365,11 +354,11 @@ body {
     <a href="#presentation">Présentation</a>
     <a href="#fonctionnalites">Fonctionnalités</a>
     <a href="#staff">Staff</a>
-    <a href="#sondage">Sondage</a>
     <a href="#discord">Discord</a>
+    <a href="#calendar-section">Événement</a>
+    
   </nav>
 </header>
-
 <section id="presentation" data-aos="fade-up">
   <h1>Bienvenue sur Dream Community</h1>
   <p>Rejoins une communauté passionnée où l'on joue, partage et rigole ensemble dans un univers bienveillant. Une atmosphère chill avec des events, du gaming et des rencontres amicales !</p>
@@ -427,10 +416,7 @@ body {
       <h3>🎥 Mat l'enchanteur - Createur Video</h3>
       <p>🎬 Chaque image est un parfum visuel : laissez les vidéos éveiller vos sens et raconter l’âme de votre histoire.</p>
     </div>
-    
-  </div>
-</section>
-
+  </div> 
 
 <section id="discord" data-aos="zoom-in">
   <h2>Rejoins-nous sur Discord</h2>
@@ -440,8 +426,36 @@ body {
   <br>
   <br>
   <iframe src="https://discord.com/widget?id=1382354628783378482&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-  </iframe>
 </section>
+
+
+<section id="calendar-section" data-aos="fade-up">
+  <h2>📆 Événements</h2>
+  <div class="filters">
+    <button onclick="filterEvents('all')">Tous</button>
+    <button onclick="filterEvents('soon')">Bientôt</button>
+    <button onclick="filterEvents('past')">Déjà passés</button>
+  </div>
+
+  <div class="calendar-container">
+    <button class="nav-btn left" onclick="prevEvent()" aria-label="Événement précédent">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="event-card" id="event-card"></div>
+
+    <button class="nav-btn right" onclick="nextEvent()" aria-label="Événement suivant">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</section>
+
+
+
 
 <footer>
   &copy; 2025 Dream Community. Tous droits réservés.
@@ -457,7 +471,96 @@ body {
     once: true,
   });
 </script>
+
+<script>
+const events = [
+  {
+    title: "Ouverture Officiel Dream Community",
+    date: "2025-07-01T16:30:00",
+    desc: "Vocal Discord 📣・Ouverture Officiel"
+  }
+];
+
+let filteredEvents = [...events];
+let currentIndex = 0;
+const card = document.getElementById("event-card");
+
+function getStatus(eventDate) {
+  const now = new Date();
+  const diffDays = (eventDate - now) / (1000 * 60 * 60 * 24);
+
+  if (eventDate < now) return {text: "Déjà passé", class: "past"};
+  if (diffDays <= 5) return {text: "Bientôt", class: "soon"};
+  return {text: "À venir", class: "upcoming"};
+}
+
+function renderEvent(index) {
+  if (!filteredEvents[index]) {
+    card.innerHTML = "<p>Aucun événement trouvé.</p>";
+    return;
+  }
+
+  // Animation fade out, puis fade in
+  card.classList.add("fade-out");
+
+  setTimeout(() => {
+    const event = filteredEvents[index];
+    const eventDate = new Date(event.date);
+    const dateStr = eventDate.toLocaleDateString("fr-FR", { day: 'numeric', month: 'long', year: 'numeric' });
+    const hourStr = eventDate.toLocaleTimeString("fr-FR", { hour: '2-digit', minute: '2-digit' });
+    const status = getStatus(eventDate);
+
+    card.innerHTML = `
+      <div class="event-status ${status.class}">${status.text}</div>
+      <h3>${event.title}</h3>
+      <p><strong>Date :</strong> ${dateStr} à ${hourStr}</p>
+      <p><strong>Détails :</strong> ${event.desc}</p>
+    `;
+
+    card.classList.remove("fade-out");
+    card.classList.add("fade-in");
+
+    // Enlever la classe fade-in après l'animation pour pouvoir rejouer à chaque changement
+    setTimeout(() => card.classList.remove("fade-in"), 500);
+
+  }, 500);
+}
+
+function prevEvent() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderEvent(currentIndex);
+  }
+}
+
+function nextEvent() {
+  if (currentIndex < filteredEvents.length - 1) {
+    currentIndex++;
+    renderEvent(currentIndex);
+  }
+}
+
+function filterEvents(type) {
+  const now = new Date();
+
+  filteredEvents = events.filter(e => {
+    const eventDate = new Date(e.date);
+    const diffDays = (eventDate - now) / (1000 * 60 * 60 * 24);
+    if (type === "soon") return diffDays >= 0 && diffDays <= 5;
+    if (type === "past") return eventDate < now;
+    return true; // "all"
+  });
+
+  currentIndex = 0;
+  renderEvent(currentIndex);
+}
+
+// Init au chargement
+window.addEventListener("DOMContentLoaded", () => {
+  filterEvents("all");
+});
+</script>
+
+
 </body>
 </html>
-
-
